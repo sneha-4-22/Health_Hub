@@ -1,5 +1,5 @@
 # Healthcare Diagnosis Assistant
-
+(in progress...........)
 ## Overview
 The Healthcare Diagnosis Assistant is a predictive tool that uses machine learning to diagnose health conditions based on patient symptoms. It leverages MindsDB for machine learning and an SQLite database for storing patient data. The assistant provides predictions and explanations for various diagnoses based on patient inputs.
 
@@ -19,8 +19,8 @@ The Healthcare Diagnosis Assistant is a predictive tool that uses machine learni
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/health-assistant.git
-    cd diagnosis_assistant.py
+    git clone https://github.com/your-username/Health_assistant.git
+    cd Health_assistant
     ```
 
 2. **Install required packages**:
@@ -34,14 +34,14 @@ The Healthcare Diagnosis Assistant is a predictive tool that uses machine learni
 
 4. **Create and populate the SQLite database**:
     ```bash
-    python setup_database.py
+    python data.py
     ```
 
 ## Usage
 
 1. **Run the assistant**:
     ```bash
-    python healthcare_diagnosis_assistant.py
+    python diagnosis_assistant.py
     ```
 
 2. **Follow the on-screen prompts** to input patient details and get a diagnosis:
