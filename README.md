@@ -41,7 +41,7 @@ The Healthcare Diagnosis Assistant is a predictive tool that uses machine learni
 
 1. **Run the assistant**:
     ```bash
-    python healthcare_diagnosis_assistant.py
+    python diagnosis_assistant.py
     ```
 
 2. **Follow the on-screen prompts** to input patient details and get a diagnosis:
