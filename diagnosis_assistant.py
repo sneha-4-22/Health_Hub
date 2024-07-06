@@ -1,19 +1,32 @@
 import mindsdb_sdk
 import sqlite3
+import time
+import traceback
 
 MINDSDB_HOST = 'http://127.0.0.1'
-MINDSDB_PORT = 47334  
-
+MINDSDB_PORT = 47334
 
 def connect_to_mindsdb():
+    for attempt in range(3):
+        try:
+            print(f"Attempting to connect to MindsDB locally (attempt {attempt + 1})...")
+            server = mindsdb_sdk.connect(f"{MINDSDB_HOST}:{MINDSDB_PORT}")
+            print("Connected successfully to MindsDB!")
+            return server
+        except Exception as error:
+            print(f"Failed to connect to MindsDB. Error: {error}")
+            if attempt < 2:
+                print("Retrying in 5 seconds...")
+                time.sleep(5)
+    return None
+
+def check_mindsdb_version(server):
     try:
-        print("Attempting to connect to MindsDB locally...")
-        server = mindsdb_sdk.connect(f"{MINDSDB_HOST}:{MINDSDB_PORT}")
-        print("Connected successfully to MindsDB!")
-        return server
-    except Exception as error:
-        print(f"Failed to connect to MindsDB. Error: {error}")
-        return None
+        status = server.status()
+        version = status.get('mindsdb_version', 'Unknown')
+        print(f"MindsDB version: {version}")
+    except Exception as e:
+        print(f"Unable to retrieve MindsDB version: {e}")
 
 def connect_to_sqlite(database_name):
     try:
@@ -25,17 +38,22 @@ def connect_to_sqlite(database_name):
         print(f"SQLite database connection failed. Error: {e}")
         return None, None
 
-
-def predict_diagnosis(model, age, gender, symptom1, symptom2, symptom3):
+def predict_diagnosis(server, age, gender, symptom1, symptom2, symptom3):
     try:
-        result = model.predict({
-            'age': age,
-            'gender': gender,
-            'symptom1': symptom1,
-            'symptom2': symptom2,
-            'symptom3': symptom3
-        })
-        return result['diagnosis'], result.get('diagnosis_explain', 'No explanation provided')
+        query = f"""
+        SELECT diagnosis, diagnosis_explain
+        FROM health_diagnosis.diagnosis_predictor
+        WHERE age = {age}
+        AND gender = '{gender}'
+        AND symptom1 = '{symptom1}'
+        AND symptom2 = '{symptom2}'
+        AND symptom3 = '{symptom3}'
+        """
+        result = server.query(query)
+        if result and len(result) > 0:
+            return result[0]['diagnosis'], result[0].get('diagnosis_explain', 'No explanation provided')
+        else:
+            return "Unable to predict", "No results returned from the model"
     except Exception as e:
         print(f"Error during prediction: {e}")
         return "Unable to predict", "An error occurred during prediction"
@@ -48,20 +66,51 @@ def get_user_input():
     symptom3 = input("Enter third symptom: ")
     return age, gender, symptom1, symptom2, symptom3
 
+def setup_mindsdb_project(server):
+    try:
+        server.query("CREATE PROJECT health_diagnosis")
+        print("Project 'health_diagnosis' created successfully.")
+    except Exception as e:
+        if "already exists" in str(e):
+            print("Project 'health_diagnosis' already exists.")
+        else:
+            print(f"Error creating project: {e}")
+
+def setup_or_get_model(server):
+    try:
+        query = """
+        CREATE MODEL health_diagnosis.diagnosis_predictor
+        PREDICT diagnosis
+        USING
+            engine = 'mindsdb',
+            integration = 'health_data',
+            query = 'SELECT * FROM patients'
+        """
+        server.query(query)
+        print("Model 'diagnosis_predictor' created successfully.")
+    except Exception as e:
+        if "already exists" in str(e):
+            print("Model 'diagnosis_predictor' already exists.")
+        else:
+            print(f"Error creating model: {e}")
+
 def main():
     server = connect_to_mindsdb()
     if server is None:
-        print("Failed to connect to MindsDB. Exiting.")
+        print("Failed to connect to MindsDB after multiple attempts. Exiting.")
         return
+
+    check_mindsdb_version(server)
 
     try:
         existing_dbs = server.list_databases()
+        print(f"Existing databases: {[db.name for db in existing_dbs]}")
         if 'health_data' not in [db.name for db in existing_dbs]:
             server.databases.create(
                 name='health_data',
                 engine='sqlite',
                 connection_args={
-                    'db_file': 'health_data.db'  
+                    'db_file': 'health_data.db'
                 }
             )
             print("SQLite database added as a data source.")
@@ -69,6 +118,7 @@ def main():
             print("SQLite database 'health_data' already exists as a data source.")
     except Exception as e:
         print(f"Error handling SQLite database as a data source: {e}")
+        return
 
     conn, cursor = connect_to_sqlite('health_data.db')
     if conn is None or cursor is None:
@@ -88,35 +138,15 @@ def main():
             print("Warning: 'patients' table is empty.")
             return
 
-        try:
-            project = server.get_project('health_diagnosis')
-            print("Project 'health_diagnosis' already exists.")
-        except Exception:
-            print("Creating project...")
-            project = server.create_project('health_diagnosis')
-            print("Project created successfully.")
+        setup_mindsdb_project(server)
+        setup_or_get_model(server)
 
-        try:
-            model = project.models.get('diagnosis_predictor')
-            print("Model 'diagnosis_predictor' already exists.")
-        except Exception:
-            print("Creating and training model...")
-            model = project.models.create(
-                name='diagnosis_predictor',
-                predict='diagnosis',
-                using={
-                    'integration_name': 'health_data',
-                    'query': 'SELECT * FROM patients'
-                }
-            )
-            print("Model creation initiated. Waiting for training to complete...")
-            model.train()
-            print("Model training complete.")
+        print("Model 'diagnosis_predictor' is ready for predictions.")
 
         while True:
             print("\nHealthcare Diagnosis Assistant")
             user_data = get_user_input()
-            diagnosis, explanation = predict_diagnosis(model, *user_data)
+            diagnosis, explanation = predict_diagnosis(server, *user_data)
             print(f"\nPredicted diagnosis: {diagnosis}")
             print(f"Explanation: {explanation}")
 
@@ -126,7 +156,9 @@ def main():
         print("Thank you for using the Healthcare Diagnosis Assistant!")
 
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"An unexpected error occurred: {e}")
+        print("Error details:")
+        traceback.print_exc()
     finally:
         if conn:
             conn.close()
