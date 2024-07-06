@@ -19,8 +19,8 @@ The Healthcare Diagnosis Assistant is a predictive tool that uses machine learni
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/health-assistant.git
-    cd diagnosis_assistant.py
+    git clone https://github.com/your-username/Health_assistant.git
+    cd Health_assistant
     ```
 
 2. **Install required packages**:
