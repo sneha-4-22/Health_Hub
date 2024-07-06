@@ -34,7 +34,7 @@ The Healthcare Diagnosis Assistant is a predictive tool that uses machine learni
 
 4. **Create and populate the SQLite database**:
     ```bash
-    python setup_database.py
+    python data.py
     ```
 
 ## Usage
