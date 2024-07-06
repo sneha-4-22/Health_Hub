@@ -50,8 +50,9 @@ def predict_diagnosis(server, age, gender, symptom1, symptom2, symptom3):
         AND symptom3 = '{symptom3}'
         """
         result = server.query(query)
-        if result and len(result) > 0:
-            return result[0]['diagnosis'], result[0].get('diagnosis_explain', 'No explanation provided')
+        result_list = result.fetch()  # Changed from fetchall() to fetch()
+        if result_list:
+            return result_list[0]['diagnosis'], result_list[0].get('diagnosis_explain', 'No explanation provided')
         else:
             return "Unable to predict", "No results returned from the model"
     except Exception as e:
