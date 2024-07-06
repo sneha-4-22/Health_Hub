@@ -1,11 +1,10 @@
 import mindsdb_sdk
 import sqlite3
 
-# MindsDB server address (running locally)
 MINDSDB_HOST = 'http://127.0.0.1'
-MINDSDB_PORT = 47334  # Updated port based on your MindsDB output
+MINDSDB_PORT = 47334  
 
-# Connect to MindsDB server locally
+
 def connect_to_mindsdb():
     try:
         print("Attempting to connect to MindsDB locally...")
@@ -16,7 +15,6 @@ def connect_to_mindsdb():
         print(f"Failed to connect to MindsDB. Error: {error}")
         return None
 
-# Connect to SQLite database
 def connect_to_sqlite(database_name):
     try:
         conn = sqlite3.connect(database_name)
@@ -27,7 +25,7 @@ def connect_to_sqlite(database_name):
         print(f"SQLite database connection failed. Error: {e}")
         return None, None
 
-# Function to make predictions
+
 def predict_diagnosis(model, age, gender, symptom1, symptom2, symptom3):
     try:
         result = model.predict({
@@ -42,7 +40,6 @@ def predict_diagnosis(model, age, gender, symptom1, symptom2, symptom3):
         print(f"Error during prediction: {e}")
         return "Unable to predict", "An error occurred during prediction"
 
-# Simple command-line interface
 def get_user_input():
     age = int(input("Enter patient's age: "))
     gender = input("Enter patient's gender (M/F): ")
@@ -51,24 +48,20 @@ def get_user_input():
     symptom3 = input("Enter third symptom: ")
     return age, gender, symptom1, symptom2, symptom3
 
-# Main function
 def main():
-    # Connect to MindsDB server
     server = connect_to_mindsdb()
     if server is None:
         print("Failed to connect to MindsDB. Exiting.")
         return
 
-    # Add SQLite database as a data source
     try:
-        # Check if the database already exists
         existing_dbs = server.list_databases()
         if 'health_data' not in [db.name for db in existing_dbs]:
             server.databases.create(
                 name='health_data',
                 engine='sqlite',
                 connection_args={
-                    'db_file': 'health_data.db'  # Changed from 'database' to 'db_file'
+                    'db_file': 'health_data.db'  
                 }
             )
             print("SQLite database added as a data source.")
@@ -77,20 +70,17 @@ def main():
     except Exception as e:
         print(f"Error handling SQLite database as a data source: {e}")
 
-    # Connect to SQLite database
     conn, cursor = connect_to_sqlite('health_data.db')
     if conn is None or cursor is None:
         print("Failed to connect to SQLite database. Exiting.")
         return
 
     try:
-        # Check if the 'patients' table exists
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='patients'")
         if cursor.fetchone() is None:
             print("Error: 'patients' table not found in the database.")
             return
 
-        # Check if the table has data
         cursor.execute("SELECT COUNT(*) FROM patients")
         row_count = cursor.fetchone()[0]
         print(f"Number of rows in 'patients' table: {row_count}")
@@ -98,7 +88,6 @@ def main():
             print("Warning: 'patients' table is empty.")
             return
 
-        # Create or get the project
         try:
             project = server.get_project('health_diagnosis')
             print("Project 'health_diagnosis' already exists.")
@@ -107,7 +96,6 @@ def main():
             project = server.create_project('health_diagnosis')
             print("Project created successfully.")
 
-        # Create and train the model
         try:
             model = project.models.get('diagnosis_predictor')
             print("Model 'diagnosis_predictor' already exists.")
@@ -125,7 +113,6 @@ def main():
             model.train()
             print("Model training complete.")
 
-        # Main loop for predictions
         while True:
             print("\nHealthcare Diagnosis Assistant")
             user_data = get_user_input()

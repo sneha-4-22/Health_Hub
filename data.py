@@ -1,13 +1,10 @@
 import sqlite3
 
-# Connect to the database (creates it if it doesn't exist)
 conn = sqlite3.connect('health_data.db')
 cursor = conn.cursor()
 
-# Drop the existing table if it exists
 cursor.execute('DROP TABLE IF EXISTS patients')
 
-# Create the table
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS patients
 (id INTEGER PRIMARY KEY, 
@@ -18,7 +15,7 @@ CREATE TABLE IF NOT EXISTS patients
  symptom3 TEXT, 
  diagnosis TEXT)
 ''')
-# Insert some sample data
+
 sample_data = [
     (1, 35, 'M', 'fever', 'cough', 'fatigue', 'flu'),
     (2, 50, 'F', 'chest pain', 'shortness of breath', 'dizziness', 'heart disease'),
@@ -223,15 +220,15 @@ sample_data = [
 ]
 cursor.executemany('INSERT INTO patients VALUES (?,?,?,?,?,?,?)', sample_data)
 
-# Commit the changes
+
 conn.commit()
 
-# Verify data insertion
+
 cursor.execute('SELECT COUNT(*) FROM patients')
 count = cursor.fetchone()[0]
 print(f"Number of records inserted: {count}")
 
-# Close the connection
+
 conn.close()
 
 print("Database created and sample data inserted successfully!")
