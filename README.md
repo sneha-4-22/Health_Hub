@@ -12,7 +12,7 @@ The Healthcare Diagnosis Assistant is a predictive tool that uses machine learni
 
 
 ![Screenshot 2024-07-06 210215](https://github.com/sneha-4-22/Health_assistant/assets/112711068/83071564-69ae-4828-9a9a-5662381b74a8)
-
+not working 😭
 ## Requirements
 - Python 3.7 or higher
 - MindsDB SDK
