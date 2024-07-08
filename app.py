@@ -3,7 +3,8 @@ from flask import Flask, render_template, request, jsonify
 from openai import OpenAI
 import mindsdb_sdk
 import time
-
+from dotenv import load_dotenv
+load_dotenv()
 app = Flask(__name__)
 
 MINDSDB_HOST = 'https://cloud.mindsdb.com'
