@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Healthcare Assistant</title>
+    <title>Healthcare Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #4a90e2;
@@ -11,11 +12,12 @@
             --accent-color: #ff69b4;
             --text-color: #333;
             --background-color: #ffffff;
+            --gradient-bg: linear-gradient(135deg, #f0f8ff 0%, #4a90e2 100%);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--secondary-color);
+            font-family: 'Roboto', sans-serif;
+            background: var(--gradient-bg);
             color: var(--text-color);
             display: flex;
             justify-content: center;
@@ -24,6 +26,7 @@
             margin: 0;
             padding: 20px;
             box-sizing: border-box;
+            transition: all 0.3s ease;
         }
 
         .container {
@@ -33,12 +36,19 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             max-width: 500px;
             width: 100%;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1, h2 {
             color: var(--primary-color);
             text-align: center;
             margin-bottom: 20px;
+            font-weight: 700;
         }
 
         input, select, button {
@@ -49,6 +59,7 @@
             border-radius: 8px;
             box-sizing: border-box;
             transition: all 0.3s ease;
+            font-family: 'Roboto', sans-serif;
         }
 
         input:focus, select:focus {
@@ -184,7 +195,7 @@
             chatHistory.scrollTop = chatHistory.scrollHeight;
         }
 
-        // Allow sending message with Enter key
+ 
         document.getElementById('chatInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 chat();
