@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute Healthcare Assistant</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f0f8ff;
+            --accent-color: #ff69b4;
+            --text-color: #333;
+            --background-color: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: var(--background-color);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1, h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #357abd;
+        }
+
+        #result, #chatHistory {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        #chatHistory {
+            height: 250px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        #chatHistory p {
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        #chatHistory p:nth-child(odd) {
+            background-color: #e6f3ff;
+        }
+
+        #chatInput {
+            margin-bottom: 10px;
+        }
+
+        .cute-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><span class="cute-icon">🏥</span> Healthcare Assistant</h1>
+        <input type="number" id="age" placeholder="Age">
+        <select id="gender">
+            <option value="">Select Gender</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+        </select>
+        <input type="text" id="symptom1" placeholder="Symptom 1">
+        <input type="text" id="symptom2" placeholder="Symptom 2">
+        <input type="text" id="symptom3" placeholder="Symptom 3">
+        <button onclick="predict()">Predict Diagnosis</button>
+        <div id="result"></div>
+        
+        <h2><span class="cute-icon">💬</span>Health Chatbot</h2>
+        <div id="chatHistory"></div>
+        <input type="text" id="chatInput" placeholder="Ask about health, diet, or lifestyle...">
+        <button onclick="chat()">Send</button>
+    </div>
+
+    <script>
+        async function predict() {
+            const age = document.getElementById('age').value;
+            const gender = document.getElementById('gender').value;
+            const symptom1 = document.getElementById('symptom1').value;
+            const symptom2 = document.getElementById('symptom2').value;
+            const symptom3 = document.getElementById('symptom3').value;
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ age, gender, symptom1, symptom2, symptom3 }),
+            });
+
+            const data = await response.json();
+            document.getElementById('result').innerHTML = `
+                <p><strong>Diagnosis:</strong> ${data.diagnosis}</p>
+                <p><strong>Explanation:</strong> ${data.explanation}</p>
+            `;
+        }
+
+        async function chat() {
+            const userInput = document.getElementById('chatInput').value;
+            if (!userInput.trim()) return;  // Prevent empty messages
+
+            document.getElementById('chatInput').value = '';
+
+            addMessageToChatHistory('You', userInput);
+
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: userInput }),
+            });
+
+            const data = await response.json();
+            addMessageToChatHistory('Assistant', data.response);
+        }
+
+        function addMessageToChatHistory(sender, message) {
+            const chatHistory = document.getElementById('chatHistory');
+            const messageElement = document.createElement('p');
+            messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            chatHistory.appendChild(messageElement);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        // Allow sending message with Enter key
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                chat();
+            }
+        });
+    </script>
+</body>
+</html>

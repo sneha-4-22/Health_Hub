@@ -45,12 +45,14 @@ def predict_diagnosis(server, age, gender, symptom1, symptom2, symptom3):
         FROM health_diagnosis.diagnosis_predictor
         WHERE age = {age}
         AND gender = '{gender}'
-        AND symptom1 = '{symptom1}'
-        AND symptom2 = '{symptom2}'
-        AND symptom3 = '{symptom3}'
+        AND symptom1 = '{symptom1.strip()}'
+        AND symptom2 = '{symptom2.strip()}'
+        AND symptom3 = '{symptom3.strip()}'
         """
+        print(f"Running prediction query: {query}")
         result = server.query(query)
-        result_list = result.fetch()  # Changed from fetchall() to fetch()
+        result_list = result.fetch()
+        print(f"Prediction result: {result_list}")
         if result_list:
             return result_list[0]['diagnosis'], result_list[0].get('diagnosis_explain', 'No explanation provided')
         else:
@@ -69,7 +71,7 @@ def get_user_input():
 
 def setup_mindsdb_project(server):
     try:
-        server.query("CREATE PROJECT health_diagnosis")
+        server.projects.create(name='health_diagnosis')
         print("Project 'health_diagnosis' created successfully.")
     except Exception as e:
         if "already exists" in str(e):
@@ -85,10 +87,16 @@ def setup_or_get_model(server):
         USING
             engine = 'mindsdb',
             integration = 'health_data',
-            query = 'SELECT * FROM patients'
+            query = 'SELECT * FROM patients';
         """
         server.query(query)
         print("Model 'diagnosis_predictor' created successfully.")
+
+        # Check model status
+        model_status = server.models.get(name='diagnosis_predictor', project='health_diagnosis').status
+        print(f"Model 'diagnosis_predictor' status: {model_status}")
+        if model_status['status'] != 'complete':
+            print(f"Model training not complete. Status: {model_status}")
     except Exception as e:
         if "already exists" in str(e):
             print("Model 'diagnosis_predictor' already exists.")
@@ -104,7 +112,7 @@ def main():
     check_mindsdb_version(server)
 
     try:
-        existing_dbs = server.list_databases()
+        existing_dbs = server.databases.list()
         print(f"Existing databases: {[db.name for db in existing_dbs]}")
         if 'health_data' not in [db.name for db in existing_dbs]:
             server.databases.create(
