@@ -3,146 +3,442 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healthcare Assistant</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #4a90e2;
-            --secondary-color: #f0f8ff;
-            --accent-color: #ff69b4;
-            --text-color: #333;
-            --background-color: #ffffff;
-            --gradient-bg: linear-gradient(135deg, #f0f8ff 0%, #4a90e2 100%);
-        }
+    <title>HealthHub - Your Complete Wellness Companion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    :root {
+        --primary-color: #3498db;
+        --secondary-color: #2ecc71;
+        --accent-color: #e74c3c;
+        --background-color: #ecf0f1;
+        --text-color: #34495e;
+        --card-bg: #ffffff;
+    }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: var(--gradient-bg);
-            color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        .container {
-            background-color: var(--background-color);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 500px;
-            width: 100%;
-            animation: fadeIn 1s ease;
-        }
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        line-height: 1.6;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
 
-        h1, h2 {
-            color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
+    header {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 1rem 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+    }
 
-        input, select, button {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
-            font-family: 'Roboto', sans-serif;
-        }
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-        input:focus, select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
-        }
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
 
-        button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: background-color 0.3s ease;
-        }
+    .nav-links {
+        display: flex;
+        list-style: none;
+    }
 
-        button:hover {
-            background-color: #357abd;
-        }
+    .nav-links li {
+        margin-left: 20px;
+    }
 
-        #result, #chatHistory {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: var(--secondary-color);
-            border-radius: 8px;
-            border: 1px solid #ddd;
-        }
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
 
-        #chatHistory {
-            height: 250px;
-            overflow-y: auto;
-            margin-bottom: 15px;
-        }
+    .nav-links a:hover {
+        color: var(--accent-color);
+    }
 
-        #chatHistory p {
-            margin: 5px 0;
-            padding: 8px;
-            border-radius: 8px;
-        }
+    main {
+        margin-top: 60px;
+        padding: 2rem 0;
+    }
 
-        #chatHistory p:nth-child(odd) {
-            background-color: #e6f3ff;
-        }
+    .hero {
+        background-image: url('https://source.unsplash.com/random/1600x900/?health');
+        background-size: cover;
+        background-position: center;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+    }
 
-        #chatInput {
-            margin-bottom: 10px;
-        }
+    .hero-content {
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 2rem;
+        border-radius: 10px;
+    }
 
-        .cute-icon {
-            font-size: 24px;
-            margin-right: 10px;
-        }
+    .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
-        }
+    .cta-button {
+        display: inline-block;
+        background-color: var(--secondary-color);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .cta-button:hover {
+        background-color: #27ae60;
+    }
+
+    .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .feature-card {
+        background-color: var(--card-bg);
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .feature-card h3 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .feature-card i {
+        font-size: 2rem;
+        color: var(--secondary-color);
+        margin-bottom: 1rem;
+    }
+
+    footer {
+        background-color: var(--primary-color);
+        color: white;
+        text-align: center;
+        padding: 1rem 0;
+        margin-top: 3rem;
+    }
+
+    /* Diagnosis Predictor Styles */
+    #diagnosisPredictor {
+        background-color: var(--card-bg);
+        border-radius: 10px;
+        padding: 2rem;
+        margin-top: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #diagnosisPredictor h2 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .submit-btn {
+        background-color: var(--secondary-color);
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+        background-color: #27ae60;
+    }
+
+    #result {
+        margin-top: 1rem;
+        padding: 1rem;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+    }
+
+    /* Health Planner Styles */
+    #healthPlanner {
+        background-color: var(--card-bg);
+        border-radius: 10px;
+        padding: 2rem;
+        margin-top: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #healthPlanner h2 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .plan-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .plan-day {
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        padding: 1rem;
+    }
+
+    .plan-day h3 {
+        color: var(--secondary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .plan-day ul {
+        list-style-type: none;
+    }
+
+    .plan-day li {
+        margin-bottom: 0.5rem;
+    }
+
+    /* Checklist Styles */
+    #healthChecklist {
+        background-color: var(--card-bg);
+        border-radius: 10px;
+        padding: 2rem;
+        margin-top: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #healthChecklist h2 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .checklist-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .checklist-item input[type="checkbox"] {
+        margin-right: 0.5rem;
+    }
+
+    .add-item-form {
+        display: flex;
+        margin-top: 1rem;
+    }
+
+    .add-item-form input[type="text"] {
+        flex-grow: 1;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 5px 0 0 5px;
+    }
+
+    .add-item-form button {
+        background-color: var(--secondary-color);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+    }
+    .chat-history {
+        height: 300px;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+    }
+    
+    .chat-message {
+        margin-bottom: 10px;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+    
+    .user-message {
+        background-color: #e1f5fe;
+        text-align: right;
+    }
+    
+    .bot-message {
+        background-color: #f0f0f0;
+    }
+    
+    .chat-input {
+        display: flex;
+    }
+    
+    .chat-input input {
+        flex-grow: 1;
+        margin-right: 10px;
+    }
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1><span class="cute-icon">🏥</span> Healthcare Assistant</h1>
-        <input type="number" id="age" placeholder="Age">
-        <select id="gender">
-            <option value="">Select Gender</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-        </select>
-        <input type="text" id="symptom1" placeholder="Symptom 1">
-        <input type="text" id="symptom2" placeholder="Symptom 2">
-        <input type="text" id="symptom3" placeholder="Symptom 3">
-        <button onclick="predict()">Predict Diagnosis</button>
-        <div id="result"></div>
-        
-        <h2><span class="cute-icon">💬</span>Health Chatbot</h2>
-        <div id="chatHistory"></div>
-        <input type="text" id="chatInput" placeholder="Ask about health, diet, or lifestyle...">
-        <button onclick="chat()">Send</button>
-    </div>
+    <header>
+        <nav class="container">
+            <div class="logo">HealthHub</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#diagnosisPredictor">Diagnosis Predictor</a></li>
+                <li><a href="#healthPlanner">Health Planner</a></li>
+                <li><a href="#healthChecklist">Health Checklist</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Welcome to HealthHub</h1>
+                <p>Your complete wellness companion for a healthier lifestyle.</p>
+                <a href="#diagnosisPredictor" class="cta-button">Get Started</a>
+            </div>
+        </section>
+
+        <section class="container features">
+            <div class="feature-card">
+                <i class="fas fa-stethoscope"></i>
+                <h3>Diagnosis Predictor</h3>
+                <p>Get instant predictions based on your symptoms.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>Health Planner</h3>
+                <p>Plan your weekly health activities with ease.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-tasks"></i>
+                <h3>Health Checklist</h3>
+                <p>Keep track of your daily health goals.</p>
+            </div>
+        </section>
+
+        <section id="diagnosisPredictor" class="container">
+            <h2>Diagnosis Predictor</h2>
+            <form id="diagnosisForm">
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" required>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="symptom1">Symptom 1:</label>
+                    <input type="text" id="symptom1" required>
+                </div>
+                <div class="form-group">
+                    <label for="symptom2">Symptom 2:</label>
+                    <input type="text" id="symptom2">
+                </div>
+                <div class="form-group">
+                    <label for="symptom3">Symptom 3:</label>
+                    <input type="text" id="symptom3">
+                </div>
+                <button type="submit" class="submit-btn">Predict Diagnosis</button>
+            </form>
+            <div id="result"></div>
+        </section>
+        <section id="healthChatbot" class="container">
+            <h2>Health Chatbot</h2>
+            <div id="chatHistory" class="chat-history"></div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Ask about health, diet, or lifestyle...">
+                <button onclick="sendMessage()" class="submit-btn">Send</button>
+            </div>
+        </section>
+        <section id="healthPlanner" class="container">
+            <h2>Weekly Health Planner</h2>
+            <div class="form-group">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" required>
+            </div>
+            <div class="form-group">
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" required>
+            </div>
+            <button onclick="generateWeeklyPlan()" class="submit-btn">Generate Plan</button>
+            <div class="plan-grid" id="weeklyPlan"></div>
+        </section>
+
+        <section id="healthChecklist" class="container">
+            <h2>Health Checklist</h2>
+            <div id="checklistItems"></div>
+            <div class="add-item-form">
+                <input type="text" id="newItem" placeholder="Add new item...">
+                <button onclick="addChecklistItem()">Add</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 HealthHub. All rights reserved.</p>
+    </footer>
+
+
+
 
     <script>
         async function predict() {
@@ -164,38 +460,77 @@
             document.getElementById('result').innerHTML = `
                 <p><strong>Diagnosis:</strong> ${data.diagnosis}</p>
                 <p><strong>Explanation:</strong> ${data.explanation}</p>
+                <p><strong>Confidence:</strong> ${data.confidence.toFixed(2)}%</p>
             `;
         }
 
-        async function chat() {
-            const userInput = document.getElementById('chatInput').value;
-            if (!userInput.trim()) return;  
+        let chatHistory = [];
 
-            document.getElementById('chatInput').value = '';
+async function chat() {
+    const userInput = document.getElementById('chatInput').value;
+    if (!userInput.trim()) return;  
 
-            addMessageToChatHistory('You', userInput);
+    document.getElementById('chatInput').value = '';
 
-            const response = await fetch('/chat', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ message: userInput }),
-            });
+    addMessageToChatHistory('You', userInput);
+    chatHistory.push({"role": "user", "content": userInput});
 
-            const data = await response.json();
-            addMessageToChatHistory('Assistant', data.response);
+    const response = await fetch('/chat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: userInput }),
+    });
+
+    const data = await response.json();
+    addMessageToChatHistory('Assistant', data.response);
+    chatHistory.push({"role": "assistant", "content": data.response});
+}
+
+async function generateWeeklyPlan() {
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+
+    const response = await fetch('/generate_plan', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ startDate, endDate }),
+    });
+
+    const data = await response.json();
+    displayWeeklyPlan(data.plan);
+}
+
+
+        function displayWeeklyPlan(plan) {
+            const weeklyPlanDiv = document.getElementById('weeklyPlan');
+            weeklyPlanDiv.innerHTML = '';
+
+            for (const [date, activities] of Object.entries(plan)) {
+                const dayPlan = document.createElement('div');
+                dayPlan.className = 'day-plan';
+                dayPlan.innerHTML = `
+                    <h3>${date}</h3>
+                    <ul>
+                        ${activities.map(activity => `<li>${activity}</li>`).join('')}
+                    </ul>
+                `;
+                weeklyPlanDiv.appendChild(dayPlan);
+            }
         }
 
         function addMessageToChatHistory(sender, message) {
             const chatHistory = document.getElementById('chatHistory');
-            const messageElement = document.createElement('p');
-            messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
-            chatHistory.appendChild(messageElement);
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = `chat-bubble ${sender.toLowerCase()}-bubble`;
+            bubbleDiv.textContent = message;
+            chatHistory.appendChild(bubbleDiv);
             chatHistory.scrollTop = chatHistory.scrollHeight;
         }
 
- 
         document.getElementById('chatInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 chat();
