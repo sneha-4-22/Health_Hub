@@ -274,52 +274,58 @@ main {
     border: 1px solid #a5d6a7;
 }
 
-/* Chat Interface Styles */
 .chat-history {
     height: 400px;
     overflow-y: auto;
-    border: 1px solid #e0e0e0;
-    border-radius: 15px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    background-color: #f9f9f9;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
 }
 
 .chat-message {
-    margin-bottom: 1rem;
-    padding: 1rem 1.5rem;
+    max-width: 70%;
+    margin-bottom: 15px;
+    padding: 10px 15px;
     border-radius: 18px;
-    max-width: 80%;
-    word-wrap: break-word;
+    position: relative;
+    clear: both;
 }
 
 .user-message {
-    background-color: #4CAF50;  /* Bright green */
+    background-color: #4CAF50;
     color: white;
-    margin-left: auto;
-    border-bottom-right-radius: 5px;
+    float: right;
+    border-bottom-right-radius: 0;
 }
 
 .bot-message {
-    background-color: #2196F3;  /* Bright blue */
+    background-color: #799351;
     color: white;
-    margin-right: auto;
-    border-bottom-left-radius: 5px;
+    float: left;
+    border-bottom-left-radius: 0;
 }
 
 .chat-input {
     display: flex;
-    gap: 1rem;
+    margin-top: 20px;
 }
 
 .chat-input input {
     flex-grow: 1;
-    padding: 1rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 25px;
-    font-size: 1rem;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    margin-right: 10px;
 }
 
+.chat-input button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
 /* Health Planner Styles */
 .plan-grid {
     display: grid;
@@ -590,27 +596,31 @@ footer {
 
         let chatHistory = [];
 
-async function chat() {
-    const userInput = document.getElementById('chatInput').value;
-    if (!userInput.trim()) return;  
+  
 
-    document.getElementById('chatInput').value = '';
-
-    addMessageToChatHistory('You', userInput);
-    chatHistory.push({"role": "user", "content": userInput});
-
-    const response = await fetch('/chat', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: userInput }),
-    });
-
-    const data = await response.json();
-    addMessageToChatHistory('Assistant', data.response);
-    chatHistory.push({"role": "assistant", "content": data.response});
-}
+        async function chat() {
+            const userInput = document.getElementById('chatInput').value;
+            if (!userInput.trim()) return;  
+        
+            document.getElementById('chatInput').value = '';
+        
+            addMessageToChatHistory('user', userInput);
+            chatHistory.push({"role": "user", "content": userInput});
+        
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: userInput }),
+            });
+        
+            const data = await response.json();
+            addMessageToChatHistory('bot', data.response);
+            chatHistory.push({"role": "assistant", "content": data.response});
+        }
+        
+        
 
 async function generateWeeklyPlan() {
     const startDate = document.getElementById('startDate').value;
@@ -669,21 +679,18 @@ function displayWeeklyPlan(plan) {
     }
 }
 
-        function addMessageToChatHistory(sender, message) {
-            const chatHistory = document.getElementById('chatHistory');
-            const bubbleDiv = document.createElement('div');
-            bubbleDiv.className = `chat-bubble ${sender.toLowerCase()}-bubble chat-message`;
-            
-            if (sender === 'user') {
-                bubbleDiv.classList.add('user-message');
-            } else if (sender === 'assistant') {
-                bubbleDiv.classList.add('bot-message');
-            }
-        
-            bubbleDiv.textContent = message;
-            chatHistory.appendChild(bubbleDiv);
-            chatHistory.scrollTop = chatHistory.scrollHeight;
-        }
+function addMessageToChatHistory(sender, message) {
+    const chatHistory = document.getElementById('chatHistory');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message ${sender}-message`;
+    
+    const contentSpan = document.createElement('span');
+    contentSpan.textContent = message;
+    messageDiv.appendChild(contentSpan);
+
+    chatHistory.appendChild(messageDiv);
+    chatHistory.scrollTop = chatHistory.scrollHeight;
+}
 
         document.getElementById('chatInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
