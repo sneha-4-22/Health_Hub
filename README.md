@@ -10,7 +10,9 @@ The Healthcare Diagnosis Assistant is a predictive tool that uses machine learni
 - Uses SQLite database for patient data storage
 
 ![image](https://github.com/sneha-4-22/Health_assistant/assets/112711068/a254b73a-d842-4f05-a8dc-69fe8bee56d3)
-According to the user query it will generate the respective plan
+
+- According to the user query it will generate the respective plan
+  
 ![image](https://github.com/sneha-4-22/Health_assistant/assets/112711068/cc9006e2-aa23-431e-9af7-529b58309697)
 
 
