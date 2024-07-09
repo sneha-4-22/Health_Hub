@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
    :root {
-    --primary-color: #3498db;
+    --primary-color: #597445;
     --secondary-color: #2ecc71;
-    --accent-color: #e74c3c;
+    --accent-color: #1A5319;
     --background-color: #f5f7fa;
     --text-color: #34495e;
     --card-bg: #ffffff;
@@ -29,8 +29,51 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     font-size: 16px;
+    cursor: none;
+   
 }
 
+
+.cursor {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: limegreen;
+    position: fixed;
+    pointer-events: none;
+    transition: transform 0.15s ease-in-out;
+    box-shadow: 0 0 10px limegreen, 0 0 20px limegreen;
+   
+}
+
+.sparkle {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: limegreen;
+    position: absolute;
+    pointer-events: none;
+    animation: fadeOut 0.8s forwards, move 0.8s ease-in-out;
+    box-shadow: 0 0 5px limegreen, 0 0 10px limegreen;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes move {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -38,7 +81,7 @@ body {
 }
 
 header {
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     color: white;
     padding: 1rem 0;
     position: fixed;
@@ -85,23 +128,37 @@ main {
 }
 
 .hero {
-    background-image: url('https://source.unsplash.com/random/1600x900/?health');
+    background: url('https://images.unsplash.com/photo-1535914254981-b5012eebbd15?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
     background-size: cover;
-    background-position: center;
     height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: white;
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-content {
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 3rem;
-    border-radius: 15px;
-    max-width: 600px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    animation: fadeInUp 1s ease-in-out;
 }
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 .hero h1 {
     font-size: 3rem;
@@ -126,7 +183,7 @@ main {
 
 .features {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2.5rem;
     margin-top: 4rem;
 }
@@ -237,15 +294,15 @@ main {
 }
 
 .user-message {
-    background-color: #e1f5fe;
-    color: #01579b;
+    background-color: #4CAF50;  /* Bright green */
+    color: white;
     margin-left: auto;
     border-bottom-right-radius: 5px;
 }
 
 .bot-message {
-    background-color: #f0f4c3;
-    color: #33691e;
+    background-color: #2196F3;  /* Bright blue */
+    color: white;
     margin-right: auto;
     border-bottom-left-radius: 5px;
 }
@@ -272,23 +329,23 @@ main {
 }
 
 .plan-day {
-    background-color: #f0f0f0;
-    border-radius: 10px;
+    border-radius: 15px;
     padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .plan-day:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .plan-day h3 {
-    color: var(--secondary-color);
+    color: white;
     margin-bottom: 1rem;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 .plan-day ul {
@@ -299,20 +356,24 @@ main {
 .plan-day li {
     margin-bottom: 0.8rem;
     padding: 0.8rem;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.plan-day li:hover {
+    transform: translateX(5px);
 }
 
 .plan-day li:before {
     content: '•';
-    color: var(--secondary-color);
+    color: inherit;
     font-weight: bold;
     display: inline-block;
     width: 1em;
     margin-left: -1em;
 }
-
 /* Health Checklist Styles */
 .checklist-item {
     display: flex;
@@ -357,7 +418,7 @@ main {
 }
 
 footer {
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     color: white;
     text-align: center;
     padding: 2rem 0;
@@ -392,6 +453,7 @@ footer {
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#diagnosisPredictor">Diagnosis Predictor</a></li>
+                <li><a href="#healthChatbot">Health Chatbot</a></li>
                 <li><a href="#healthPlanner">Health Planner</a></li>
                 <li><a href="#healthChecklist">Health Checklist</a></li>
             </ul>
@@ -400,6 +462,7 @@ footer {
 
     <main>
         <section id="home" class="hero">
+            
             <div class="hero-content">
                 <h1>Welcome to HealthHub</h1>
                 <p>Your complete wellness companion for a healthier lifestyle.</p>
@@ -413,6 +476,12 @@ footer {
                 <h3>Diagnosis Predictor</h3>
                 <p>Get instant predictions based on your symptoms.</p>
             </div>
+            <div class="feature-card">
+                <i class="fas fa-comments"></i>
+                <h3>Health Chatbot</h3>
+                <p>Get instant health advice and answers to your health queries.</p>
+            </div>
+            
             <div class="feature-card">
                 <i class="fas fa-calendar-alt"></i>
                 <h3>Health Planner</h3>
@@ -573,27 +642,44 @@ function addChecklistItem() {
     checklistItems.appendChild(itemDiv);
     document.getElementById('newItem').value = '';
 }
-        function displayWeeklyPlan(plan) {
-            const weeklyPlanDiv = document.getElementById('weeklyPlan');
-            weeklyPlanDiv.innerHTML = '';
+function getRandomColor() {
+    const colors = [
+        '#c7f9cc', '#d8f3dc', '#2d6a4f', '#74c69d', 
+        '#475b33', '#B0EBB4', '#9fffcb', '#344903'
+    ];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
 
-            for (const [date, activities] of Object.entries(plan)) {
-                const dayPlan = document.createElement('div');
-                dayPlan.className = 'day-plan';
-                dayPlan.innerHTML = `
-                    <h3>${date}</h3>
-                    <ul>
-                        ${activities.map(activity => `<li>${activity}</li>`).join('')}
-                    </ul>
-                `;
-                weeklyPlanDiv.appendChild(dayPlan);
-            }
-        }
+function displayWeeklyPlan(plan) {
+    const weeklyPlanDiv = document.getElementById('weeklyPlan');
+    weeklyPlanDiv.innerHTML = '';
+
+    for (const [date, activities] of Object.entries(plan)) {
+        const dayPlan = document.createElement('div');
+        dayPlan.className = 'plan-day';
+        const backgroundColor = getRandomColor();
+        dayPlan.style.backgroundColor = backgroundColor;
+        dayPlan.innerHTML = `
+            <h3>${date}</h3>
+            <ul>
+                ${activities.map(activity => `<li>${activity}</li>`).join('')}
+            </ul>
+        `;
+        weeklyPlanDiv.appendChild(dayPlan);
+    }
+}
 
         function addMessageToChatHistory(sender, message) {
             const chatHistory = document.getElementById('chatHistory');
             const bubbleDiv = document.createElement('div');
-            bubbleDiv.className = `chat-bubble ${sender.toLowerCase()}-bubble`;
+            bubbleDiv.className = `chat-bubble ${sender.toLowerCase()}-bubble chat-message`;
+            
+            if (sender === 'user') {
+                bubbleDiv.classList.add('user-message');
+            } else if (sender === 'assistant') {
+                bubbleDiv.classList.add('bot-message');
+            }
+        
             bubbleDiv.textContent = message;
             chatHistory.appendChild(bubbleDiv);
             chatHistory.scrollTop = chatHistory.scrollHeight;
@@ -602,6 +688,38 @@ function addChecklistItem() {
         document.getElementById('chatInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 chat();
+            }
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            const cursor = document.createElement("div");
+            cursor.classList.add("cursor");
+            document.body.appendChild(cursor);
+
+            document.addEventListener("mousemove", (e) => {
+                cursor.style.left = e.pageX + "px";
+                cursor.style.top = e.pageY + "px";
+
+                createSparkle(e.pageX, e.pageY);
+            });
+
+            document.addEventListener("mousedown", () => {
+                cursor.style.transform = "scale(0.8)";
+            });
+
+            document.addEventListener("mouseup", () => {
+                cursor.style.transform = "scale(1)";
+            });
+
+            function createSparkle(x, y) {
+                const sparkle = document.createElement("div");
+                sparkle.classList.add("sparkle");
+                sparkle.style.left = x + "px";
+                sparkle.style.top = y + "px";
+                document.body.appendChild(sparkle);
+
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 800);
             }
         });
     </script>
