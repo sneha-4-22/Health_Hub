@@ -9,12 +9,12 @@ The Healthcare Diagnosis Assistant is a predictive tool that uses machine learni
 - Integration with MindsDB for machine learning
 - Uses SQLite database for patient data storage
 
+![image](https://github.com/sneha-4-22/Health_assistant/assets/112711068/a254b73a-d842-4f05-a8dc-69fe8bee56d3)
+According to the user query it will generate the respective plan
+![image](https://github.com/sneha-4-22/Health_assistant/assets/112711068/cc9006e2-aa23-431e-9af7-529b58309697)
 
-![image](https://github.com/sneha-4-22/Health_assistant/assets/112711068/073d6b5e-421c-4f13-8acf-b6a1ca514729)
-![image](https://github.com/sneha-4-22/Health_assistant/assets/112711068/52eeff64-9a27-41ce-bc33-8ec3c87bcb04)
 
 
-not working 😭
 ## Requirements
 - Python 3.7 or higher
 - MindsDB SDK
