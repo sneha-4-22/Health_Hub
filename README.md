@@ -8,12 +8,29 @@ The Healthcare Diagnosis Assistant is a predictive tool that uses machine learni
 - Explanation for the predicted diagnosis
 - Integration with MindsDB for machine learning
 - Uses SQLite database for patient data storage
+## Screenshots
+| ![Health Plan Generation](https://github.com/sneha-4-22/Health_assistant/assets/112711068/80e73a53-a012-4681-82a5-55da7fd1730e) |
+|:--:|
+| **Health Hub** |
+| Landing Page |
 
-![image](https://github.com/sneha-4-22/Health_assistant/assets/112711068/a254b73a-d842-4f05-a8dc-69fe8bee56d3)
+| ![Nutrition Tracking](https://github.com/sneha-4-22/Health_assistant/assets/112711068/5f9ea399-fc25-4df4-8541-a09ac8a6afe1) |
+|:--:|
+| **Features** |
+| Health hub app features |
 
-- According to the user query it will generate the respective plan
-  
-![image](https://github.com/sneha-4-22/Health_assistant/assets/112711068/cc9006e2-aa23-431e-9af7-529b58309697)
+| ![Exercise Routines](https://github.com/sneha-4-22/Health_assistant/assets/112711068/a254b73a-d842-4f05-a8dc-69fe8bee56d3) |
+|:--:|
+| **AI Chatbot Assistant** |
+| Interact with our intelligent chatbot for instant health advice and personalized recommendations. |
+
+
+| ![Exercise Routines](https://github.com/sneha-4-22/Health_assistant/assets/112711068/03e9b841-fce8-4ea7-8b65-d611337630b0) |
+|:--:|
+| **Intelligent Response System** |
+| Our health assistant generates appropriate plans based on user queries during chatbot assistance session, ensuring personalized guidance for each individual's health journey. |
+
+
 
 
 
