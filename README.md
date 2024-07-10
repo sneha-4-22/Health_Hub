@@ -1,4 +1,4 @@
-# Healthcare Diagnosis Assistant
+# HealthHub
 (in progress...........)
 ## Overview
 The Healthcare Diagnosis Assistant is a predictive tool that uses machine learning to diagnose health conditions based on patient symptoms. It leverages MindsDB for machine learning and an SQLite database for storing patient data. The assistant provides predictions and explanations for various diagnoses based on patient inputs.
