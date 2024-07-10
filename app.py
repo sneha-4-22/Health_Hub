@@ -24,10 +24,10 @@ def connect_to_mindsdb():
     try:
         print("Attempting to connect to MindsDB...")
         server = mindsdb_sdk.connect(MINDSDB_HOST, api_key=MINDSDB_API_KEY)
-        print("Connected successfully to MindsDB!")
+        print("Connected YAYYYY!")
         return server
     except Exception as error:
-        print(f"Failed to connect to MindsDB. Error: {error}")
+        print(f"Failed to connect to MindsDB shit. Error: {error}")
         return None
 
 server = connect_to_mindsdb()
