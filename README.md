@@ -85,6 +85,8 @@ HealthHub is a web application that prioritizes personal health management using
     - Enter three symptoms
 
 3. **View the predicted diagnosis and explanation**.
+
+4. 
 (WEB)
 ```bash
     python app.py
