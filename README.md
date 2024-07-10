@@ -8,6 +8,16 @@ The Healthcare Diagnosis Assistant is a predictive tool that uses machine learni
 - Explanation for the predicted diagnosis
 - Integration with MindsDB for machine learning
 - Uses SQLite database for patient data storage
+
+## YouTube Demonstration
+
+
+
+[![Watch the video](https://img.youtube.com/vi/oDEMWkdwTWs/0.jpg)](https://www.youtube.com/watch?v=oDEMWkdwTWs)
+
+
+
+
 ## Screenshots
 | ![Health Plan Generation](https://github.com/sneha-4-22/Health_assistant/assets/112711068/80e73a53-a012-4681-82a5-55da7fd1730e) |
 |:--:|
