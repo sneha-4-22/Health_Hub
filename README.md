@@ -93,7 +93,7 @@ HealthHub is a web application that prioritizes personal health management using
 ```
 
 
-## Sample Data
+##  Data
 The SQLite database (`health_data.db`) is pre-populated with the following sample data:
 
 | ID | Age | Gender | Symptom1      | Symptom2             | Symptom3      | Diagnosis       |
