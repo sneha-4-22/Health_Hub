@@ -49,7 +49,7 @@ def predict():
     symptom1 = data.get('symptom1', '').lower()
     symptom2 = data.get('symptom2', '').lower()
     symptom3 = data.get('symptom3', '').lower()
-    # tried many times but i think mindsDB has some problems so i just typed it manually👻👻👻👻
+    # tried many times but i think mindsDB has some problems so i just typed it manually👻👻👻👻(filhal i am working on it )
     print(f"Parsed data: age={age}, gender={gender}, symptoms={symptom1}, {symptom2}, {symptom3}")
     if symptom1 == 'fever' and symptom2 == 'cough' and symptom3 == 'fatigue':
         diagnosis = "Common Cold"
