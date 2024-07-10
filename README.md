@@ -39,7 +39,7 @@ HealthHub is a web application that prioritizes personal health management using
 | ![Exercise Routines](https://github.com/sneha-4-22/Health_assistant/assets/112711068/03e9b841-fce8-4ea7-8b65-d611337630b0) |
 |:--:|
 | **Intelligent Response System** |
-| Our health assistant generates appropriate plans based on user queries during chatbot assistance session, ensuring personalized guidance for each individual's health journey. |
+|  health assistant generates appropriate plans based on user queries during chatbot assistance session, ensuring personalized guidance for each individual's health journey. |
 
 
 
@@ -85,6 +85,8 @@ HealthHub is a web application that prioritizes personal health management using
     - Enter three symptoms
 
 3. **View the predicted diagnosis and explanation**.
+
+4. 
 (WEB)
 ```bash
     python app.py
