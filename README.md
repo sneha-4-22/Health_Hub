@@ -1,13 +1,24 @@
-# Healthcare Diagnosis Assistant
+# HealthHub
 (in progress...........)
 ## Overview
-The Healthcare Diagnosis Assistant is a predictive tool that uses machine learning to diagnose health conditions based on patient symptoms. It leverages MindsDB for machine learning and an SQLite database for storing patient data. The assistant provides predictions and explanations for various diagnoses based on patient inputs.
+HealthHub is a web application that prioritizes personal health management using **MindsDB**. Get instant diagnosis predictions, chat with a health assistant, plan your wellness journey, and track your health goals.
+
 
 ## Features
 - Predictive diagnosis based on patient symptoms
 - Explanation for the predicted diagnosis
 - Integration with MindsDB for machine learning
 - Uses SQLite database for patient data storage
+
+## YouTube Demonstration
+
+
+
+[![Watch the video](https://img.youtube.com/vi/oDEMWkdwTWs/0.jpg)](https://www.youtube.com/watch?v=oDEMWkdwTWs)
+
+
+
+
 ## Screenshots
 | ![Health Plan Generation](https://github.com/sneha-4-22/Health_assistant/assets/112711068/80e73a53-a012-4681-82a5-55da7fd1730e) |
 |:--:|
@@ -62,7 +73,7 @@ The Healthcare Diagnosis Assistant is a predictive tool that uses machine learni
     ```
 
 ## Usage
-
+(CLI)
 1. **Run the assistant**:
     ```bash
     python diagnosis_assistant.py
@@ -74,12 +85,11 @@ The Healthcare Diagnosis Assistant is a predictive tool that uses machine learni
     - Enter three symptoms
 
 3. **View the predicted diagnosis and explanation**.
+(WEB)
+```bash
+    python app.py
+```
 
-## Files
-
-- **`setup_database.py`**: Script to create and populate the SQLite database with sample data.
-- **`healthcare_diagnosis_assistant.py`**: Main script to run the Healthcare Diagnosis Assistant.
-- **`requirements.txt`**: List of required Python packages.
 
 ## Sample Data
 The SQLite database (`health_data.db`) is pre-populated with the following sample data:
