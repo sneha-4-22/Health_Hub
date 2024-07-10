@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS patients
  diagnosis TEXT)
 ''')
 
-sample_data = [
+data = [
     (1, 35, 'M', 'fever', 'cough', 'fatigue', 'flu'),
     (2, 50, 'F', 'chest pain', 'shortness of breath', 'dizziness', 'heart disease'),
     (3, 29, 'M', 'nausea', 'headache', 'fatigue', 'migraine'),
@@ -218,7 +218,7 @@ sample_data = [
     (199, 43, 'M', 'vomiting', 'nausea', 'headache', 'food poisoning'),
     (200, 36, 'F', 'runny nose', 'sneezing', 'cough', 'cold'),
 ]
-cursor.executemany('INSERT INTO patients VALUES (?,?,?,?,?,?,?)', sample_data)
+cursor.executemany('INSERT INTO patients VALUES (?,?,?,?,?,?,?)', data)
 
 
 conn.commit()
