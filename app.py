@@ -107,7 +107,7 @@ def generate_plan():
 
 def predict_diagnosis(server, age, gender, symptom1, symptom2, symptom3):
     try:
-        # Manual case for testing
+      
         if  symptom1 == 'fever' and symptom2 == 'cough' and symptom3 == 'fatigue':
             return "Common Cold", "The combination of fever, cough, and fatigue is often indicative of a common cold.", 80.0
 
@@ -184,7 +184,7 @@ def generate_personalized_health_plan(start_date, end_date):
         plan = eval(completion.choices[0].message.content)
     except Exception as e:
         print(f"Error generating health plan: {str(e)}")
-        # Fallback to a generic plan if there's an error
+      
         plan = {}
         for i in range(date_range):
             current_date = start + datetime.timedelta(days=i)
