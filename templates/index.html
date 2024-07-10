@@ -33,7 +33,6 @@ body {
    
 }
 
-
 .cursor {
     width: 15px;
     height: 15px;
@@ -43,7 +42,6 @@ body {
     pointer-events: none;
     transition: transform 0.15s ease-in-out;
     box-shadow: 0 0 10px limegreen, 0 0 20px limegreen;
-   
 }
 
 .sparkle {
@@ -54,7 +52,7 @@ body {
     position: absolute;
     pointer-events: none;
     animation: fadeOut 0.8s forwards, move 0.8s ease-in-out;
-    box-shadow: 0 0 5px limegreen, 0 0 10px limegreen;
+    box-shadow: 0 0 5px limegreen, 0 0 10px limegreen, 0 0 15px #32cd32, 0 0 20px #32cd32;
 }
 
 @keyframes fadeOut {
@@ -67,13 +65,16 @@ body {
 }
 
 @keyframes move {
-    0% {
-        transform: translateY(0);
+    from {
+        transform: translate(0, 0);
     }
-    100% {
-        transform: translateY(-20px);
+    to {
+        transform: translate(20px, 20px);
     }
 }
+
+
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -502,7 +503,7 @@ footer {
 
         <section id="diagnosisPredictor" class="container">
             <h2>Diagnosis Predictor</h2>
-            <form id="diagnosisForm">
+            <form id="diagnosisForm" onsubmit="event.preventDefault(); predict();">
                 <div class="form-group">
                     <label for="age">Age:</label>
                     <input type="number" id="age" required>
@@ -529,6 +530,7 @@ footer {
                 </div>
                 <button type="submit" class="submit-btn">Predict Diagnosis</button>
             </form>
+            
             <div id="result"></div>
         </section>
         <section id="healthChatbot" class="container">
@@ -574,26 +576,36 @@ footer {
         async function predict() {
             const age = document.getElementById('age').value;
             const gender = document.getElementById('gender').value;
-            const symptom1 = document.getElementById('symptom1').value;
-            const symptom2 = document.getElementById('symptom2').value;
-            const symptom3 = document.getElementById('symptom3').value;
-
-            const response = await fetch('/predict', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ age, gender, symptom1, symptom2, symptom3 }),
-            });
-
-            const data = await response.json();
-            document.getElementById('result').innerHTML = `
-                <p><strong>Diagnosis:</strong> ${data.diagnosis}</p>
-                <p><strong>Explanation:</strong> ${data.explanation}</p>
-                <p><strong>Confidence:</strong> ${data.confidence.toFixed(2)}%</p>
-            `;
+            const symptom1 = document.getElementById('symptom1').value.toLowerCase().trim();
+            const symptom2 = document.getElementById('symptom2').value.toLowerCase().trim();
+            const symptom3 = document.getElementById('symptom3').value.toLowerCase().trim();
+        
+            console.log("Sending data:", { age, gender, symptom1, symptom2, symptom3 });
+        
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ age, gender, symptom1, symptom2, symptom3 }),
+                });
+        
+                const data = await response.json();
+                console.log("Received response:", data);
+        
+                document.getElementById('result').innerHTML = `
+                    <p><strong>Diagnosis:</strong> ${data.diagnosis}</p>
+                    <p><strong>Explanation:</strong> ${data.explanation}</p>
+                    <p><strong>Confidence:</strong> ${data.confidence.toFixed(2)}%</p>
+                `;
+            } catch (error) {
+                console.error("Error:", error);
+                document.getElementById('result').innerHTML = `
+                    <p><strong>Error:</strong> Failed to get prediction. Please try again.</p>
+                `;
+            }
         }
-
         let chatHistory = [];
 
   
