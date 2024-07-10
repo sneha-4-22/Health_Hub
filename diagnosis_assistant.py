@@ -20,13 +20,6 @@ def connect_to_mindsdb():
                 time.sleep(5)
     return None
 
-def check_mindsdb_version(server):
-    try:
-        status = server.status()
-        version = status.get('mindsdb_version', 'Unknown')
-        print(f"MindsDB version: {version}")
-    except Exception as e:
-        print(f"Unable to retrieve MindsDB version: {e}")
 
 def connect_to_sqlite(database_name):
     try:
