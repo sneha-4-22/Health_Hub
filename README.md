@@ -73,7 +73,7 @@ HealthHub is a web application that prioritizes personal health management using
     ```
 
 ## Usage
-
+(CLI)
 1. **Run the assistant**:
     ```bash
     python diagnosis_assistant.py
@@ -85,12 +85,11 @@ HealthHub is a web application that prioritizes personal health management using
     - Enter three symptoms
 
 3. **View the predicted diagnosis and explanation**.
+(WEB)
+```bash
+    python app.py
+```
 
-## Files
-
-- **`setup_database.py`**: Script to create and populate the SQLite database with sample data.
-- **`healthcare_diagnosis_assistant.py`**: Main script to run the Healthcare Diagnosis Assistant.
-- **`requirements.txt`**: List of required Python packages.
 
 ## Sample Data
 The SQLite database (`health_data.db`) is pre-populated with the following sample data:
