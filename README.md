@@ -1,7 +1,7 @@
 
 # HealthHub - Your Complete Wellness Companion 🏥💪
 
-Welcome to **HealthHub**, your comprehensive wellness companion designed to help you maintain a healthier lifestyle. This platform integrates cutting-edge AI technology, including **MindsDB**, to offer a variety of tools like a **Diagnosis Predictor**, **Health Chatbot**, **Weekly Health Planner**, and **Health Checklist**.
+Welcome to **HealthHub**, your comprehensive wellness companion designed to help you maintain a healthier lifestyle. This platform integrates cutting-edge AI technology, with the help of  **MindsDB**, to offer a variety of tools like a **Diagnosis Predictor**, **Health Chatbot**, **Weekly Health Planner**, and **Health Checklist**.
 
 [![Quira Vote](https://img.shields.io/badge/Quira-View%20Repo-blue)](https://quira.sh/repo/sneha-4-22-Health_assistant-824874405?utm_source=copy&utm_share_context=quests_repos)
 <!--
