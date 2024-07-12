@@ -10,14 +10,15 @@ Welcome to **HealthHub**, your comprehensive wellness companion designed to help
 ## Table of Contents 📑
 
 - [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
   - [Diagnosis Predictor](#diagnosis-predictor)
   - [Health Chatbot](#health-chatbot)
   - [Weekly Health Planner](#weekly-health-planner)
   - [Health Checklist](#health-checklist)
-- [Contributing](#contributing)
-- [License](#license)
+- [YouTube Demonstration](#youtube-demonstration)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Data](#data)
 - [Support](#support)
 
 ## Features 🌟
