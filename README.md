@@ -18,7 +18,6 @@ Welcome to **HealthHub**, your comprehensive wellness companion designed to help
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Data](#data)
 - [Support](#support)
 
 ## Features 🌟
@@ -101,7 +100,10 @@ Keep track of your daily health goals with our customizable checklist.
 3. **Set up MindsDB**:
     - Follow the [MindsDB installation guide](https://docs.mindsdb.com/install) to install and run MindsDB locally.
     - Note the server address and port (default is `http://127.0.0.1:47334`).
-
+    - make .env file add your mindsDB api key 
+```bash
+    python data.py
+```
 4. **Create and populate the SQLite database**:
     ```bash
     python data.py
@@ -128,17 +130,6 @@ Keep track of your daily health goals with our customizable checklist.
 ```
 
 
-##  Data
-The SQLite database (`health_data.db`) is pre-populated with the following sample data:
-
-| ID | Age | Gender | Symptom1      | Symptom2             | Symptom3      | Diagnosis       |
-|----|-----|--------|---------------|----------------------|---------------|-----------------|
-| 1  | 35  | M      | fever         | cough                | fatigue       | flu             |
-| 2  | 50  | F      | chest pain    | shortness of breath  | dizziness     | heart disease   |
-| 3  | 29  | M      | nausea        | headache             | fatigue       | migraine        |
-| 4  | 67  | F      | cough         | shortness of breath  | fatigue       | bronchitis      |
-| 5  | 45  | M      | dizziness     | nausea               | headache      | hypertension    |
-| ...| ... | ...    | ...           | ...                  | ...           | ...             |
 
 
 ## Support 💬
