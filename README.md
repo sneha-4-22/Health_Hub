@@ -102,7 +102,7 @@ Keep track of your daily health goals with our customizable checklist.
     - Note the server address and port (default is `http://127.0.0.1:47334`).
     - make .env file add your mindsDB api key 
 ```bash
-    python data.py
+    MINDSDB_API_KEY=''
 ```
 4. **Create and populate the SQLite database**:
     ```bash
