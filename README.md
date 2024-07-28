@@ -132,13 +132,5 @@ Keep track of your daily health goals with our customizable checklist.
 
 
 
-## Support 💬
 
-If you like this project, please support it by upvoting on Quira and starring the GitHub repository!
-
-[![Quira Repo](https://img.shields.io/badge/Quira-View%20Repo-blue)](https://quira.sh/repo/sneha-4-22-Health_assistant-824874405?utm_source=copy&utm_share_context=quests_repos)
-<!--
-[![GitHub Stars](https://img.shields.io/github/stars/sneha-4-22/HealthHub?style=social)](https://github.com/sneha-4-22/Health_assistant)
--->
-Thank you for your support!
 
