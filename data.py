@@ -223,7 +223,7 @@ cursor.executemany('INSERT INTO patients VALUES (?,?,?,?,?,?,?)', data)
 
 conn.commit()
 
-
+#to create the db 
 cursor.execute('SELECT COUNT(*) FROM patients')
 count = cursor.fetchone()[0]
 print(f"Number of records inserted: {count}")
