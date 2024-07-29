@@ -2,7 +2,7 @@ import mindsdb_sdk
 import sqlite3
 import time
 import traceback
-
+#you need to have an api key also visit mindsDB minds ok and copy the api key from thre
 MINDSDB_HOST = 'http://127.0.0.1'
 MINDSDB_PORT = 47334
 
