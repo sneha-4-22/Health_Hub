@@ -51,32 +51,8 @@ def predict():
     symptom3 = data.get('symptom3', '').lower()
     # tried many times but i think mindsDB has some problems so i just typed it manually(filhal i am working on it )
     print(f"Parsed data: age={age}, gender={gender}, symptoms={symptom1}, {symptom2}, {symptom3}")
-    if symptom1 == 'fever' and symptom2 == 'cough' and symptom3 == 'fatigue':
-        diagnosis = "Common Cold"
-        explanation = "The combination of fever, cough, and fatigue is often indicative of a common cold."
-        confidence = 80.0
-    elif symptom1 == 'fever' and symptom2 == 'cough' and symptom3 == 'shortness of breath':
-        diagnosis = "Flu"
-        explanation = "The combination of fever, cough, and shortness of breath is often indicative of the flu."
-        confidence = 75.0
-    elif symptom1 == 'chest pain' and symptom2 == 'shortness of breath' and symptom3 == 'dizziness':
-        diagnosis = "Heart Attack"
-        explanation = "The combination of chest pain, shortness of breath, and dizziness could indicate a heart attack."
-        confidence = 90.0
-    elif symptom1 == 'fever' and symptom2 == 'rash' and symptom3 == 'joint pain':
-        diagnosis = "Dengue Fever"
-        explanation = "The combination of fever, rash, and joint pain could be indicative of dengue fever."
-        confidence = 85.0
-    elif symptom1 == 'headache' and symptom2 == 'nausea' and symptom3 == 'sensitivity to light':
-        diagnosis = "Migraine"
-        explanation = "The combination of headache, nausea, and sensitivity to light is often indicative of a migraine."
-        confidence = 80.0
-    elif symptom1 == 'abdominal pain' and symptom2 == 'diarrhea' and symptom3 == 'fever':
-        diagnosis = "Gastroenteritis"
-        explanation = "The combination of abdominal pain, diarrhea, and fever is often indicative of gastroenteritis."
-        confidence = 75.0
-    else:
-        diagnosis, explanation, confidence = predict_diagnosis(server, age, gender, symptom1, symptom2, symptom3)
+    
+   diagnosis, explanation, confidence = predict_diagnosis(server, age, gender, symptom1, symptom2, symptom3)
 
     
     response = {'diagnosis': diagnosis, 'explanation': explanation, 'confidence': confidence}
